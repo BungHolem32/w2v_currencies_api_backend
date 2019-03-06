@@ -12,6 +12,7 @@ app.use(cors());
 const apiRouter = require("./routes/api");
 const baseRouter = require("./routes");
 
+
 app.use(require("express-redis")());
 app.use('/', baseRouter);
 app.use("/api", apiRouter);
