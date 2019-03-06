@@ -5,6 +5,7 @@ require("dotenv").load();
 const {app,DB} = require("./src/app");
 const debug = require("debug")("exchange.com:server");
 const http = require("http");
+const Jobs = require('./src/jobs');
 
 /**
  * Get port from environment and store in Express.
@@ -86,5 +87,7 @@ function onListening() {
   debug("Listening on " + bind);
 }
 
+
+Jobs.schedule(3000,Jobs.updateConversion, DB);
 
 module.exports = server;
