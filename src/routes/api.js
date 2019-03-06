@@ -1,35 +1,22 @@
 const express = require("express");
 const router = express.Router();
+const CurrencyController = require('../controllers/currency-controller');
 
 
 /*
  *   Endpoint for  currencies controller.
  */
 router.get("/currencies", async (req, res, next) => {
-    let results = [
-        {
-            "name": "ILS",
-            "conversion": 2.73
-        },
-        {
-            "name": "USD",
-            "conversion": 3.94
-        },
-        {
-            "name": "EUR",
-            "conversion": 1.34
-        },
-        {
-            "name": "GBP",
-            "conversion": 1.76
-        },
-        {
-            "name": "CAD",
-            "conversion": 3.13
-        }
-    ];
+    let results = await CurrencyController.getCurrencies(req.app.get('DB'));
 
     res.jsonp(results);
+});
+
+//Endpoint that return individual currency
+router.get("/currencies/:name", async (req, res, next) => {
+    let result = await CurrencyController.getCurrencyByName(req.app.get('DB'), req.params.name);
+
+    res.jsonp(result);
 });
 
 

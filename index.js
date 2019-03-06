@@ -2,7 +2,7 @@
  * Module dependencies.
  */
 require("dotenv").load();
-const app = require("./src/app");
+const {app,DB} = require("./src/app");
 const debug = require("debug")("exchange.com:server");
 const http = require("http");
 
